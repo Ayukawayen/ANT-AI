@@ -4,8 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANT Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/store.js"></script>
+    <script src="js/post.js"></script>
+    <script src="js/postWrapper.js"></script>
+    <script src="js/field.js"></script>
+    <script src="js/prompt.js"></script>
+    <script src="js/ui_event.js"></script>
+    <script defer src="default_value.js"></script>
+    <script defer src="script.js"></script>
+	<style id="style_active_article">#對話 {display:flex;}</style>
 </head>
 <body>
-Hello ANT!
+	<header>
+		<nav>
+			<ul>
+				<li>首頁</li>
+				<li id="nav_chat_name">聊天室</li>
+				<li id="nav_active_article">對話</li>
+			</ul>
+		</nav>
+		<button id="menu_icon">…</button>
+		<menu isShow="false">
+			<li onclick="onMenuItemClick('對話');">對話</li>
+			<li onclick="onMenuItemClick('角色');">角色</li>
+			<li onclick="onMenuItemClick('形象');">形象</li>
+			<li onclick="onMenuItemClick('知識');">知識</li>
+			<li onclick="onMenuItemClick('模板');">模板</li>
+			<li onclick="onMenuItemClick('參數');">參數</li>
+			<hr />
+			<li onclick="onMenuItemClick('管理');">管理</li>
+		</menu>
+	</header>
+	<main>
+		<article id="對話">
+			<section class="content">
+				<ul class="posts">
+				</ul>
+			</section>
+			<section class="bottom">
+				<textarea id="conversation_usertext"></textarea>
+				<button id="conversation_button">↑</button>
+			</section>
+		</article>
+		<article id="角色">
+			<section class="content">
+			</section>
+			<div class="bottom">
+				<button onclick="resetField()">重置</button>
+				<button onclick="saveField()">儲存</button>
+			</div>
+		</article>
+		<article id="形象">
+			<section class="content">
+			</section>
+			<div class="bottom">
+				<button onclick="resetField()">重置</button>
+				<button onclick="saveField()">儲存</button>
+			</div>
+		</article>
+		<article id="知識">
+			<section class="content">
+			</section>
+			<div class="bottom">
+				<button onclick="resetField()">重置</button>
+				<button onclick="saveField()">儲存</button>
+			</div>
+		</article>
+		<article id="模板">
+			<label class="flex" field-key="template.content_length">
+				content_length <input type="number" class="value" value="16000" />
+			</label>
+			<textarea disabled>可用變數清單：{{char.name}}, {{char.description}}, {{char.scenario}}, {{char.example_dialogue}}, {{user.name}}, {{user.description}}, {{chat.memory}}</textarea>
+			<textarea class="value grow" field-key="template"></textarea>
+			<div class="bottom">
+				<button onclick="resetField()">重置</button>
+				<button onclick="saveField()">儲存</button>
+			</div>
+		</article>
+		<article id="參數">
+			<label class="flex" field-key="param.api_url">
+				API URL <input type="text" class="value" style="flex:1" placeholder="https://..." />
+			</label>
+			<label class="flex" field-key="param.api_key">
+				API KEY <input type="password" class="value" style="flex:1" />
+			</label>
+			<textarea class="value grow" field-key="paramter">{}</textarea>
+			<div class="bottom">
+				<button onclick="resetField()">重置</button>
+				<button onclick="saveField()">儲存</button>
+			</div>
+		</article>
+		<article id="管理">
+			<label class="flex">
+				<input type="text" id="new_chat_id" class="value" placeholder="New Chat ID" style="flex:1; margin:0 0.5rem;" /> <button onclick="onForkChatClick()">建立副本</button>
+			</label>
+			<label class="flex">
+				<button onclick="onDeleteChatClick()" style="flex:1; margin:0 0.5rem;">刪除聊天</button>
+			</label>
+		</article>
+	</main>
+	<div id="overlay"><div class="spinner"></div></div>
 </body>
+
+<template id="html_post_item">
+	<li key="" role="" mode="text">
+		<div class="text">
+			<div class="content"></div>
+			<div class="control">
+				<button event="left" class="moveLeft">＜</button>
+				<span>- / -</span>
+				<button event="right" class="moveRight">＞</button>
+				<button event="add"    alt="新增" title="新增一則回應">➕</button>
+				<button event="delete" alt="刪除" title="刪除此則回應">🗑</button>
+				<button event="regen"  alt="重整" title="重新產生回應">🔄</button>
+				<button event="edit" class="right" alt="編輯" title="編輯回應內容">✏️</button>
+			</div>
+		</div>
+		<div class="edit">
+			<textarea></textarea>
+			<div class="control">
+				<button event="cancel" alt="放棄" title="放棄變更">❌</button>
+				<button event="save"   alt="確定" title="確定">✔️</button>
+			</div>
+		</div>
+	</li>
+</template>
+<template id="html_field_text">
+	<label field-key="">
+		<div><span class="title"></span><code class="key"></code></div>
+		<input type="text" class="value" />
+	</label>
+</template>
+<template id="html_field_textarea">
+	<label field-key="">
+		<div><span class="title"></span><code class="key"></code></div>
+		<textarea class="value"></textarea>
+	</label>
+</template>
+
 </html>
