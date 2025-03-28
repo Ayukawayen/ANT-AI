@@ -186,6 +186,42 @@ main>article>.bottom>button {
 	margin:0.5rem 0.5rem 0 0;
 }
 
+main>article#首頁 #index_new_chat {
+	width:100%;
+}
+
+main>article#首頁 .chats>li {
+	margin:0.5rem 0;
+	padding:0.5rem;
+	
+	border-radius:0.5rem;
+	
+	background-color:#339;
+	color:#fff;
+}
+
+main>article#首頁 .chats>li:hover {
+	background-color:#99c;
+	color:#fff;
+}
+
+main>article#首頁 .chats>li>a {
+	display:block;
+	
+	height:3.75rem;
+	
+	overflow-y:auto;
+	line-height:1.25;
+	text-align:justify;
+	
+	text-decoration:none;
+	color:inherit;
+}
+
+main>article#首頁 .chats>li>a .title {
+	font-size:1em;
+}
+
 main>article#對話>.bottom {
 	display:flex;
 	flex-direction:row;

@@ -1,3 +1,7 @@
+function onNewChatClick() {
+	location.href = '?' + newChatId();
+}
+
 function onMenuIconClick(ev) {
 	let node = document.querySelector('header >menu');
 	node.setAttribute('isShow', node.getAttribute('isShow')=='true' ? 'false' : 'true');
@@ -29,7 +33,7 @@ function onMenuItemClick(aid) {
 }
 
 function onForkChatClick() {
-	let id = document.getElementById('new_chat_id').value;
+	let id = newChatId();
 	if(peekField(id) || peekConversation(id)) {
 		alert('Chat already exists.');
 		return;
@@ -43,10 +47,9 @@ function onForkChatClick() {
 
 function onDeleteChatClick() {
 	if(!confirm('Delete  this chat. Are you sure?\n這會刪除此聊天資料，你確定嗎？')) return;
-	removeField();
-	removeConversation();
+	removeChat();
 	
-	location.href = '?' + chatId;
+	location.href = '?';
 }
 
 function onExportChatClick() {

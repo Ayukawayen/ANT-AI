@@ -1,21 +1,18 @@
-let chatId = (location.search||'?A').substring(1);
+let chatId = (location.search||'?').substring(1);
 document.querySelector('#nav_chat_name').textContent = '聊天室#' + chatId;
 
-loadField();
-loadConversation();
-if(!currentPostKey) {
-	addPost('assistant', '');
+loadChats();
+if(!chatId) {
+	refreshChatNode();
+} else {
+	onMenuItemClick('對話');
+	loadField();
+	loadConversation();
+	if(!currentPostKey) {
+		addPost('assistant', '');
+	}
+	scrollPostToBottom();
 }
-
-(()=>{
-	let post = getPost(currentPostKey);
-	if(post.parent) return;
-	if(post.content) return;
-	onPostIconClick('edit', currentPostKey);
-})();
-
-scrollPostToBottom();
-
 
 
 document.body.addEventListener('click', ()=>{

@@ -1,6 +1,44 @@
+const StoreKey_Chats = '__.chats';
 const StoreKey_Conversation = 'conversation';
 const StoreKey_Field = 'field';
 const StoreKey_Secret = 'secret';
+
+let chatList = [];
+
+function storeChats() {
+	localStorage.setItem(StoreKey_Chats, JSON.stringify(chatList));
+}
+function loadChats() {
+	let value = localStorage.getItem(StoreKey_Chats);
+	if(!value) return;
+	
+	chatList = JSON.parse(value);
+}
+
+function pingChat(id, content) {
+	id ||= chatId;
+	content ||= '';
+	
+	let chatItem = {
+		id:id,
+		lastUpdate:Date.now(),
+		content:content,
+	};
+	
+	chatList = chatList.filter((item)=>(item.id!=id));
+	chatList.push(chatItem);
+	
+	storeChats();
+}
+function removeChat(id) {
+	id ||= chatId;
+	
+	removeField(id);
+	removeConversation(id);
+	
+	chatList = chatList.filter((item)=>(item.id!=id));
+	storeChats();
+}
 
 function prepareConversation() {
 	return {
@@ -12,6 +50,8 @@ function prepareConversation() {
 function storeConversation(id, value) {
 	id ||= chatId;
 	value ||= prepareConversation();
+	
+	pingChat(id, (value.posts[value.currentPostKey]||{}).content);
 	
 	let key = id + '.' + StoreKey_Conversation;
 	value = JSON.stringify(value);
@@ -28,7 +68,7 @@ function loadConversation(id) {
 	id ||= chatId;
 	let key = id + '.' + StoreKey_Conversation;
 	
-	let value = localStorage.getItem(key);
+	let value = peekConversation(id);
 	if(!value) return;
 	
 	value = JSON.parse(value);
@@ -69,12 +109,18 @@ function storeField(id, value) {
 	localStorage.setItem(id + '.' + StoreKey_Field, JSON.stringify(value.public));
 	localStorage.setItem(id + '.' + StoreKey_Secret, JSON.stringify(value.secret));
 }
+
 function peekField(id) {
 	id ||= chatId;
+	
+	let pub = localStorage.getItem(id + '.' + StoreKey_Field);
+	let secret = localStorage.getItem(id + '.' + StoreKey_Secret);
+	
+	if(!pub && !secret) return null;
 
 	return {
-		public: localStorage.getItem(id + '.' + StoreKey_Field),
-		secret: localStorage.getItem(id + '.' + StoreKey_Secret),
+		public: pub,
+		secret: secret,
 	};
 }
 

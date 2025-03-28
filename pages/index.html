@@ -9,17 +9,18 @@
     <script src="js/post.js"></script>
     <script src="js/postWrapper.js"></script>
     <script src="js/field.js"></script>
+    <script src="js/chat.js"></script>
     <script src="js/prompt.js"></script>
     <script src="js/ui_event.js"></script>
     <script defer src="default_value.js"></script>
     <script defer src="script.js"></script>
-	<style id="style_active_article">#對話 {display:flex;}</style>
+	<style id="style_active_article">#首頁 {display:flex;}</style>
 </head>
 <body>
 	<header>
 		<nav>
 			<ul>
-				<li>首頁</li>
+				<li onclick="location.href='?';" style="cursor:default;">首頁</li>
 				<li id="nav_chat_name">聊天室</li>
 				<li id="nav_active_article">對話</li>
 			</ul>
@@ -37,6 +38,15 @@
 		</menu>
 	</header>
 	<main>
+		<article id="首頁">
+			<section class="top">
+				<button id="index_new_chat" onclick="onNewChatClick();">新聊天</button>
+			</section>
+			<section class="content">
+				<ul class="chats">
+				</ul>
+			</section>
+		</article>
 		<article id="對話">
 			<section class="content">
 				<ul class="posts">
@@ -97,7 +107,7 @@
 		</article>
 		<article id="管理">
 			<label class="flex">
-				<input type="text" id="new_chat_id" class="value" placeholder="New Chat ID" style="flex:1; margin:0 0.5rem;" /> <button onclick="onForkChatClick()">建立副本</button>
+				<button onclick="onForkChatClick()" style="flex:1; margin:0 0.5rem;">建立聊天副本</button>
 			</label>
 			<label class="flex">
 				<button onclick="onDeleteChatClick()" style="flex:1; margin:0 0.5rem;">刪除聊天</button>
@@ -107,6 +117,11 @@
 	<div id="overlay"><div class="spinner"></div></div>
 </body>
 
+<template id="html_chat_item">
+	<li>
+		<a href=""><h4 class="title"></h4><p class="content"></p></a>
+	</li>
+</template>
 <template id="html_post_item">
 	<li key="" role="" mode="text">
 		<div class="text">
