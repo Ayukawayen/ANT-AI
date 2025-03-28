@@ -20,13 +20,20 @@ async function sendRequest(options) {
 	let overlayNode = document.querySelector('#overlay');
 	try {
 		overlayNode.classList.add('show');
-		const fetched = await fetch(url, {
-			method: "POST",
-			headers: {
-				Authorization: "Bearer " + apikey,
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(data)
+		
+		let headers = {
+			'Authorization': 'Bearer ' + apikey,
+			'Content-Type': 'application/json',
+		};
+		if(url.includes('openrouter.ai/api')) {
+			headers['X-Title'] = 'ANT Chat';
+			headers['HTTP-Referer'] = 'https://ayukawayen.github.io/ANT-Chat/pages/';
+		}
+		
+		let fetched = await fetch(url, {
+			method:'POST',
+			headers: headers,
+			body: JSON.stringify(data),
 		});
 		
 		let resp = await fetched.text();
