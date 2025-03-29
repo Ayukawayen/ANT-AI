@@ -3,8 +3,6 @@ function newChatId() {
 }
 
 function refreshChatNode() {
-	let chats = chatList.reverse();
-	
 	for(let i=chatList.length-1; i>=0; --i) {
 		let chat = chatList[i];
 		addChatNode(chat.id, chat.content);
