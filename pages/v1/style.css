@@ -190,6 +190,10 @@ main>article#首頁 #index_new_chat {
 	width:100%;
 }
 
+main>article#首頁 .chats {
+	list-style:none;
+}
+
 main>article#首頁 .chats>li {
 	margin:0.5rem 0;
 	padding:0.5rem;
