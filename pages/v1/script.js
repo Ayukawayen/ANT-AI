@@ -1,5 +1,5 @@
 let chatId = (location.search||'?').substring(1);
-document.querySelector('#nav_chat_name').textContent = '聊天室#' + chatId;
+document.querySelector('#nav_chat_name').textContent = '聊天室#' + chatId.substr(0,8);
 
 loadChats();
 if(!chatId) {
