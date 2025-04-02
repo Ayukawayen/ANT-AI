@@ -26,8 +26,8 @@ async function sendRequest(options) {
 			'Content-Type': 'application/json',
 		};
 		if(url.includes('openrouter.ai/api')) {
-			headers['X-Title'] = 'ANT Chat';
-			headers['HTTP-Referer'] = 'https://ayukawayen.github.io/ANT-Chat/pages/v1/';
+			headers['X-Title'] = env.OPENROUTER_TITLE;
+			headers['HTTP-Referer'] = env.OPENROUTER_REFERER;
 		}
 		
 		let fetched = await fetch(url, {
