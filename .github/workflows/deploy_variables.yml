@@ -12,5 +12,5 @@ jobs:
       
       - name: Replace Env Variables
         run: |
-          sed -i "s`'YOUR_OPENROUTER_TITLE'`'${{vars.OPENROUTER_TITLE}}'`g" pages/v1/env.js
-          sed -i "s`'YOUR_OPENROUTER_REFERER'`'${{vars.OPENROUTER_REFERER}}'`g" pages/v1/env.js
+          sed -i "s;'YOUR_OPENROUTER_TITLE';'${{vars.OPENROUTER_TITLE}}';g" "pages/v1/env.js"
+          sed -i "s;'YOUR_OPENROUTER_REFERER';'${{vars.OPENROUTER_REFERER}}';g" "pages/v1/env.js"
