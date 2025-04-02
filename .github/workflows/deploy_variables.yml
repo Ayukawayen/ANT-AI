@@ -16,7 +16,7 @@ jobs:
           sed -i "s;'YOUR_OPENROUTER_REFERER';'${{vars.OPENROUTER_REFERER}}';g" pages/v1/env.js
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          artifact_name: public
-          artifact_dir: ./
+          branch: main
+          folder: .
