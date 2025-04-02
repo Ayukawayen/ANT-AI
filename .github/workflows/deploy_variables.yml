@@ -1,0 +1,16 @@
+name: Env Variables
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Replace Env Variables
+        run: |
+          sed -i "s/'YOUR_OPENROUTER_TITLE'/'${{vars.OPENROUTER_TITLE}}'/g" env.js
+          sed -i "s/'YOUR_OPENROUTER_REFERER'/'${{vars.OPENROUTER_REFERER}}'/g" env.js
