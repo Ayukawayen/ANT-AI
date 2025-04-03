@@ -226,6 +226,10 @@ main>article#首頁 .chats>li>a {
 
 main>article#首頁 .chats>li>a .title {
 	font-size:1em;
+	
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
 }
 
 main>article#對話>.bottom {
