@@ -2,10 +2,11 @@
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
+	
+	font-size:14px;
 }
 
 html {
-	font-size:16px;
 	font-family:sans-serif;
 	background-color:#fff;
 }
@@ -55,6 +56,8 @@ body {
 
 button {
 	min-height:2.5rem;
+	
+	padding:0.25rem 0.5rem;
 }
 
 textarea, input {
@@ -181,7 +184,6 @@ main>article>.bottom {
 }
 
 main>article>.bottom>button {
-	width:2rem;
 	height:2rem;
 	margin:0.5rem 0.5rem 0 0;
 }
@@ -303,9 +305,12 @@ main>article#對話 .control>span {
 }
 
 main>article#對話 .control>button {
-	width:1.6rem;
-	height:1.6rem;
+	width:2rem;
+	height:2rem;
+	padding:0.25rem;
 	min-height:0;
+	
+	margin:0 0.25rem;
 	
 	border-style:none;
 	
