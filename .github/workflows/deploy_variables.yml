@@ -1,4 +1,4 @@
-name: Variables
+name: Replace Variables
 
 on:
   push:
