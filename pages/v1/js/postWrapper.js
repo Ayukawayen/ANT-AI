@@ -79,7 +79,7 @@ function refreshPostText(key) {
 		
 		let pNode = document.createElement('p');
 		
-		let regexp = /(\"[^\"]*\"|\「[^\」]*\」)/g;
+		let regexp = /(\"[^\"]*\"|\「[^\」]*\」|\“[^\”]*\”)/g;
 		
 		let segments = p.split(regexp);
 		for(let i=0; i<segments.length; ++i) {
