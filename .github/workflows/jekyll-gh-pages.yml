@@ -30,6 +30,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+     - name: Replace environment variable placeholders
+        run: |
+          find . -type f -name "*env.js" -exec sed -i 's/YOUR_OPENROUTER_TITLE/${{ vars.OPENROUTER_TITLE }}/g' {} \;
+          find . -type f -name "*env.js" -exec sed -i 's/YOUR_OPENROUTER_REFERER/${{ vars.OPENROUTER_REFERER }}/g' {} \;
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
