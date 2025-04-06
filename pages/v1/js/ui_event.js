@@ -52,7 +52,26 @@ function onDeleteChatClick() {
 	location.href = '?';
 }
 
-function onExportChatClick() {
+function onExportGdriveClick() {
+	let data = {
+		id:chatId,
+		conversation:prepareConversation(),
+		field:prepareField().public,
+	};
+	
+	exportGdrive(chatId+'.json', JSON.stringify(data));
+}
+function onImportGdriveClick() {
+	importGdrive((response)=>{
+		let data = JSON.parse(response);
+		storeField(data.id, data.field);
+		storeConversation(data.id, data.conversation);
+		
+		location.href = '?' + data.id;
+	});
+}
+
+function onExportFileClick() {
 	let data = JSON.stringify({
 		id:chatId,
 		conversation:prepareConversation(),
@@ -68,27 +87,28 @@ function onExportChatClick() {
 	URL.revokeObjectURL(aNode.href);
 }
 
-function onImportChatFileChange(ev) {
+function onImportFileChange(ev) {
 	let file = event.target.files[0];
 	if(!file) return;
 	
 	let reader = new FileReader();
 	
 	reader.onload = function(e) {
-		onImportChatClick.data = JSON.parse(e.target.result);
+		onImportFileClick.data = JSON.parse(e.target.result);
+		onImportFileClick();
 	};
 	
 	reader.readAsText(file);
 }
 
-function onImportChatClick() {
-	if(!onImportChatClick.data) {
-		alert('讀取資料失敗!');
+function onImportFileClick() {
+	if(!onImportFileClick.data) {
+		document.querySelector('#import_chat_file').click();
 		return;
 	}
 	
-	storeField(onImportChatClick.data.id, onImportChatClick.data.field);
-	storeConversation(onImportChatClick.data.id, onImportChatClick.data.conversation);
+	storeField(onImportFileClick.data.id, onImportFileClick.data.field);
+	storeConversation(onImportFileClick.data.id, onImportFileClick.data.conversation);
 	
-	location.href = '?' + onImportChatClick.data.id;
+	location.href = '?' + onImportFileClick.data.id;
 }

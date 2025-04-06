@@ -17,9 +17,9 @@ async function sendRequest(options) {
 	
 	let data = buildRequest(options);
 	
-	let overlayNode = document.querySelector('#overlay');
+	let loadingNode = document.querySelector('#loading');
 	try {
-		overlayNode.classList.add('show');
+		loadingNode.classList.add('show');
 		
 		let headers = {
 			'Authorization': 'Bearer ' + apikey,
@@ -56,7 +56,7 @@ console.log(resp);
 		console.error(error);
 		alert(error.toString());
 	} finally {
-		overlayNode.classList.remove('show');
+		loadingNode.classList.remove('show');
 	}
 	
 	

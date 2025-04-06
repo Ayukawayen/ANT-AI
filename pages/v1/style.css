@@ -22,7 +22,7 @@ body {
 	color:#333;
 }
 
-#overlay {
+.overlay {
 	display:none;
 	
 	position:fixed;
@@ -31,10 +31,11 @@ body {
 	
 	z-index:1000;
 }
-#overlay.show {
+.overlay.show {
 	display:initial;
 }
-#overlay .spinner {
+
+#loading .spinner {
 	position:absolute;
 	margin:auto;
 	top:0; bottom:0; left: 0; right:0;

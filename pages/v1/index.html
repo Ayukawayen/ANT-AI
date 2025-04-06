@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANT AI</title>
     <link rel="stylesheet" href="style.css">
+	<script src="https://apis.google.com/js/api.js"></script>
+	<script src="https://accounts.google.com/gsi/client"></script>
+    <script src="env.js"></script>
+    <script src="env_overwrite.js"></script>
     <script src="js/store.js"></script>
+    <script src="js/gdrive.js"></script>
     <script src="js/post.js"></script>
     <script src="js/postWrapper.js"></script>
     <script src="js/field.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/prompt.js"></script>
     <script src="js/ui_event.js"></script>
-    <script src="env.js"></script>
-    <script src="env_overwrite.js"></script>
     <script defer src="default_value.js"></script>
     <script defer src="script.js"></script>
 	<style id="style_active_article">#首頁 {display:flex;}</style>
@@ -114,9 +117,20 @@
 			<label class="flex">
 				<button onclick="onDeleteChatClick()" style="flex:1; margin:0 0.5rem;">刪除聊天</button>
 			</label>
+			<label>
+				<div>匯出</div>
+				<button onclick="onExportGdriveClick()">至Google Drive</button>
+				<button onclick="onExportFileClick()">至本機檔案</button>
+			</label>
+			<label>
+				<div>匯入</div>
+				<button onclick="onImportGdriveClick()">自Google Drive</button>
+				<input type="file" id="import_chat_file" style="display:none;"/>
+				<button onclick="onImportFileClick()">自本機檔案</button>
+			</label>
 		</article>
 	</main>
-	<div id="overlay"><div class="spinner"></div></div>
+	<div id="loading" class="overlay"><div class="spinner"></div></div>
 </body>
 
 <template id="html_chat_item">

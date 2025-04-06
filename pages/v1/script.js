@@ -33,5 +33,5 @@ document.querySelector('#conversation_button').addEventListener('click', onConve
 document.querySelector('#conversation_usertext').addEventListener('keydown', onConversationTextKeydown);
 
 if(document.querySelector('#import_chat_file')) {
-	document.querySelector('#import_chat_file').addEventListener('change', onImportChatFileChange);
+	document.querySelector('#import_chat_file').addEventListener('change', onImportFileChange);
 }
