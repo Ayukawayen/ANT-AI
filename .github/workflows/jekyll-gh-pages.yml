@@ -34,6 +34,8 @@ jobs:
         run: |
           find . -type f -name "*env.js" -exec sed -i "s|'YOUR_OPENROUTER_TITLE'|'${{ vars.OPENROUTER_TITLE }}'|g" {} \;
           find . -type f -name "*env.js" -exec sed -i "s|'YOUR_OPENROUTER_REFERER'|'${{ vars.OPENROUTER_REFERER }}'|g" {} \;
+          find . -type f -name "*env.js" -exec sed -i "s|'YOUR_GOOGLE_DRIVE_CLIENT_ID'|'${{ vars.GOOGLE_DRIVE_CLIENT_ID }}'|g" {} \;
+          find . -type f -name "*env.js" -exec sed -i "s|'YOUR_GOOGLE_DRIVE_API_KEY'|'${{ vars.GOOGLE_DRIVE_API_KEY }}'|g" {} \;
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
