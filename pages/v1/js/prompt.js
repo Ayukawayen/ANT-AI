@@ -42,7 +42,9 @@ async function sendRequest(options) {
 		
 		resp = JSON.parse(resp);
 console.log(resp);
-		if(resp.choices.length > 0) {
+		if(resp.error) {
+			alert('Error: ' + (`'${resp.error.message}'` || 'Unknown'));
+		} else if(resp.choices && resp.choices.length > 0) {
 			let msg = resp.choices[0].message;
 			addPost(msg.role, msg.content, {parent:options.parent});
 			
