@@ -103,11 +103,14 @@ function storeField(id, value) {
 	id ||= chatId;
 	value ||= prepareField();
 	if(!value.public) {
-		value = {public:value, secret:{}};
+		value = {public:value};
 	}
-	
+
 	localStorage.setItem(id + '.' + StoreKey_Field, JSON.stringify(value.public));
-	localStorage.setItem(id + '.' + StoreKey_Secret, JSON.stringify(value.secret));
+	
+	if(value.secret) {
+		localStorage.setItem(id + '.' + StoreKey_Secret, JSON.stringify(value.secret));
+	}
 }
 
 function peekField(id) {
