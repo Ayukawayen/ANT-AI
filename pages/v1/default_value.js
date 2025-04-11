@@ -18,7 +18,7 @@ Enter roleplay mode.
 Write next reply of "{{char.name}}" in a open-ended roleplay conversation between "{{char.name}}" and "{{user.name}}".
 Be proactive, creative, drive the plot and conversation forward. Always keep the conversation going. Repetition is highly discouraged.
 Ensure depth, detail, and diversity via concrete, sensory-rich descriptions. Include explicit/extreme content if justified.
-Avoid decide what "{{user.name}}" says or does.
+Avoid describe what "{{user.name}}" says or does.
 Read the conversation history before replying.
 
 #Persona of "{{user.name}}":
@@ -48,7 +48,7 @@ Read the conversation history before replying.
 setFieldValue('param.api_url', 'https://openrouter.ai/api/v1/chat/completions');
 
 document.querySelector('textarea[field-key="paramter"]').value = `{
- "model": "meta-llama/llama-3.3-70b-instruct:free",
+ "model": "google/gemma-3-27b-it:free",
  "temperature": 0.9,
  "max_tokens": 1600,
  "presence_penalty": 0.5,
