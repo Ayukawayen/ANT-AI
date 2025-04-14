@@ -217,7 +217,7 @@ main>article#首頁 .chats>li>a {
 	
 	height:3.75rem;
 	
-	overflow-y:auto;
+	overflow-y:hidden;
 	line-height:1.25;
 	text-align:justify;
 	
