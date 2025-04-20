@@ -43,7 +43,7 @@ body {
 	width:6rem;
 	height:6rem;
 	
-	border:0.25rem solid #ccffff;
+	border:0.25rem solid #99cccc;
 	border-top-color:#333366;
 	border-radius:50%;
 
@@ -173,6 +173,8 @@ main>article textarea {
 	height:6rem;
 	
 	padding:0.25rem;
+	
+	resize:vertical;
 }
 main>article label.flex {
 	display:flex;
