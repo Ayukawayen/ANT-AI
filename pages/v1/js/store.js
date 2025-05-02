@@ -117,7 +117,7 @@ function storeField(id, value) {
 	id ||= chatId;
 	value ||= prepareField();
 	if(!value.public) {
-		value = {public:value, secret:{}};
+		value = {public:value};
 	}
 	
 	localStorage.setItem(id + '.' + StoreKey_Field, JSON.stringify(value.public));
