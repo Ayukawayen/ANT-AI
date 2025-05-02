@@ -70,11 +70,25 @@ function loadConversation(id) {
 	
 	let value = peekConversation(id);
 	if(!value) return;
-	
+
 	value = JSON.parse(value);
 	
 	posts = value.posts;
-	
+
+let rootChilds = [];
+for(let k in posts) {
+	if(k!=0 && !posts[k].parent) {
+		posts[k].parent = 0;
+		rootChilds.push(parseInt(k));
+	}
+}
+posts[0] ||= {
+	childs:rootChilds,
+	latests:[null, null],
+	role:'system',
+	content:'',
+};
+
 	updateCurrentPostKey(value.currentPostKey);
 }
 function removeConversation(id) {
@@ -103,9 +117,9 @@ function storeField(id, value) {
 	id ||= chatId;
 	value ||= prepareField();
 	if(!value.public) {
-		value = {public:value};
+		value = {public:value, secret:{}};
 	}
-
+	
 	localStorage.setItem(id + '.' + StoreKey_Field, JSON.stringify(value.public));
 	
 	if(value.secret) {

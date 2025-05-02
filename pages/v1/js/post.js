@@ -28,12 +28,12 @@ function onPostIconClick(type, key) {
 		removePost(key);
 	}
 	if(type == 'add') {
-		if(post.role == 'assistant') {
-			sendRequest({parent:parent});
-		} else {
-			let k = addPost('user', '', {parent:parent});
+		if(post.role == 'user' || !parent) {
+			let k = addPost(post.role, '', {parent:parent});
 			
 			onPostIconClick('edit', k);
+		} else {
+			sendRequest({parent:parent});
 		}
 	}
 	if(type == 'regen') {
@@ -98,7 +98,7 @@ function updateCurrentPostKey(key, options) {
 	
 	currentPostKey = key;
 	
-	let keys = getReversedPostKeys(null).reverse();
+	let keys = getReversedPostKeys(currentPostKey).reverse();
 	
 	for(let i=keys.length-2; i>=0; --i) {
 		posts[keys[i]].latests = insertLatest(keys[i+1], posts[keys[i]].latests);
@@ -110,7 +110,7 @@ function updateCurrentPostKey(key, options) {
 }
 
 function getReversedPostKeys(key) {
-	key ||= currentPostKey;
+	if(key == undefined) key = currentPostKey;
 	
 	let result = [];
 	
@@ -125,7 +125,10 @@ function getReversedPostKeys(key) {
 
 function addPost(role, content, options) {
 	options ||= {};
-	let parent = options.parent || currentPostKey;
+	let parent = options.parent;
+	if(parent === undefined) {
+		parent = currentPostKey;
+	}
 	
 	let key = nextKey();
 	
@@ -161,7 +164,7 @@ function removePost(key, options) {
 	
 	if(!options.ignoreParent) {
 		((key, parent)=>{
-			if(!parent) return;
+			if(parent == undefined) return;
 			
 			parentPost = posts[parent];
 			if(!parentPost) return;

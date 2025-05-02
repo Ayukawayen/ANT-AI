@@ -38,6 +38,11 @@ function updatePostNode(node, key, role, content) {
 	node.setAttribute('role', role||'system');
 	node.querySelector('textarea').value = content||'';
 	
+	let parent = posts[key].parent;
+	if(!parent) {
+		node.setAttribute('is_first', 'true');
+	}
+	
 	node.querySelectorAll('button[event]').forEach((button)=>{
 		let e = button.getAttribute('event');
 		button.setAttribute('onclick', `onPostIconClick('${e}', ${key})`);

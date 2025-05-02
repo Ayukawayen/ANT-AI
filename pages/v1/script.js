@@ -9,7 +9,7 @@ if(!chatId) {
 	loadField();
 	loadConversation();
 	if(!currentPostKey) {
-		addPost('assistant', '');
+		addPost('assistant', '', {parent:0});
 	}
 	
 	(()=>{
