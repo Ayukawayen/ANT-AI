@@ -328,6 +328,10 @@ main>article#對話 li[role="user"] .control>button[event="regen"] {
 	display:none;
 }
 
+main>article#對話 li[is_first="true"] .control>button[event="regen"] {
+	display:none;
+}
+
 main>article#對話 .control>button.right {
 	float:right;
 }

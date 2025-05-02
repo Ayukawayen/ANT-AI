@@ -112,7 +112,8 @@ function loadGdriveToken() {
 
 function initClient() {
 	gapi.load('client:auth2:picker', async () => {
-		await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
+		//await gapi.client.init({ apiKey: API_KEY, discoveryDocs: DISCOVERY_DOCS });
+		await gapi.client.init({ discoveryDocs: DISCOVERY_DOCS });
 		gapi.client.setToken(loadGdriveToken());
 	});
 	tokenClient = google.accounts.oauth2.initTokenClient({
