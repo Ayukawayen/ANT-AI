@@ -22,6 +22,11 @@ body {
 	color:#333;
 }
 
+a {
+	text-decoration:inherit;
+	color:inherit;
+}
+
 .overlay {
 	display:none;
 	
