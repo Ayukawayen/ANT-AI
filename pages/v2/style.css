@@ -24,6 +24,10 @@ body {
 	color:#333;
 }
 
+textarea, input {
+	font-family:inherit;
+}
+
 a {
 	text-decoration:inherit;
 	color:inherit;
@@ -172,8 +176,6 @@ article.content_edit >ul >li >input[type="checkbox"] {
 
 article.content_edit >ul >li >button {
 	display:inline-block;
-	
-	font-family:monospace;
 	
 	width:2rem;
 	height:2rem;
