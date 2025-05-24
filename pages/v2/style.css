@@ -24,7 +24,7 @@ body {
 	color:#333;
 }
 
-textarea, input {
+textarea, input, button {
 	font-family:inherit;
 }
 
