@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANT AI (Alpha)</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="env.js"></script>
+    <script src="env_overwrite.js"></script>
+    <script src="js/management.js"></script>
+    <script src="js/field.js"></script>
+    <script src="js/prompt.js"></script>
+    <script src="js/post.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/menu.js"></script>
+    <script defer src="default_value.js"></script>
+    <script defer src="script.js"></script>
+	<style id="style_active_article">#首頁 {display:flex;}</style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="?">首頁</a></li>
+				<li id="nav_chat_name">聊天室</li>
+				<li id="nav_active_article"></li>
+			</ul>
+		</nav>
+		<button id="menu_icon" onclick="onMenuIconClick(event);">…</button>
+		<menu isShow="false">
+			<li onclick="onMenuItemClick('對話');">對話</li>
+			<li onclick="onMenuItemClick('形象');">形象</li>
+			<li onclick="onMenuItemClick('提示詞');">提示詞</li>
+			<li onclick="onMenuItemClick('參數');">參數</li>
+			<hr />
+			<li onclick="onMenuItemClick('管理');">管理</li>
+		</menu>
+	</header>
+	<main>
+		<article id="首頁">
+			<label>
+				<button class="grow" onclick="onNewChatClick()">新聊天</button>
+			</label>
+			<section class="grow">
+				<ul class="chats">
+				</ul>
+			</section>
+		</article>
+		
+		<article id="對話">
+			<section class="grow">
+				<ul class="posts">
+				</ul>
+			</section>
+			<section class="bottom">
+				<textarea id="conversation_usertext" onkeydown="onUsertextKeydown(event)"></textarea>
+				<button onclick="onUsertextSubmitClick()">↑</button>
+			</section>
+		</article>
+
+		<article id="形象" class="content_edit">
+			<ul>
+				<li><input type="checkbox" onchange="onDisplayChange('persona', 'u', this.checked);" title="切換顯示" checked /><button class="u" title="停用(Ctrl+U)" onclick="document.execCommand('underline');"><u>U</u></button></li>
+				<li><input type="checkbox" onchange="onDisplayChange('persona', 'i', this.checked);" title="切換顯示" checked /><button class="i" title="淡化(Ctrl+I)" onclick="document.execCommand('italic');"><i>I</i></button></li>
+				<a class="help" onclick="alert(this.title);" title="［U：停用，不會在提示詞內。］
+［I：淡化文字，仍會在提示詞內，方便閱讀。］">說明</a>
+				<li class="right">
+					<label>形象名<input type="text" field-key="user" placeholder="{{user}}"></label>
+				</li>
+			</ul>
+			<div contenteditable="true" class="grow" field-key="persona" hide_u="false" hide_i="false" hide_b="false"></div>
+			<div class="bottom_control">
+				<button onclick="onResetClick()">全部重置</button>
+				<button onclick="onSaveClick()">全部儲存</button>
+			</div>
+		</article>
+
+		<article id="提示詞" class="content_edit">
+			<ul>
+				<li><input type="checkbox" onchange="onDisplayChange('prompt', 'u', this.checked);" title="切換顯示" checked /><button class="u" title="停用(Ctrl+U)" onclick="document.execCommand('underline');"><u>U</u></button></li>
+				<li><input type="checkbox" onchange="onDisplayChange('prompt', 'i', this.checked);" title="切換顯示" checked /><button class="i" title="淡化(Ctrl+I)" onclick="document.execCommand('italic');"><i>I</i></button></li>
+				<a class="help" onclick="alert(this.title);" title="［U：停用，不會在提示詞內。］
+［I：淡化文字，仍會在提示詞內，方便閱讀。］">說明</a>
+				<li class="right">
+					<label>提示詞長度<input type="number" field-key="context_size" value="16000"></label>
+				</li>
+			</ul>
+			<div contenteditable="true" class="grow" field-key="prompt"></div>
+			<div class="bottom_control">
+				<button onclick="onResetClick()">全部重置</button>
+				<button onclick="onSaveClick()">全部儲存</button>
+			</div>
+		</article>
+		
+		<article id="參數">
+			<textarea class="grow" field-key="api_parameter"></textarea>
+			<div class="bottom_control">
+				<button onclick="onResetClick()">全部重置</button>
+				<button onclick="onSaveClick()">全部儲存</button>
+			</div>
+		</article>
+		
+		<article id="管理">
+			<label>API URL<input type="url" field-key="api_url" onchange="onApiChange()" /></label>
+			<label>API KEY<input type="password" field-key="api_key" onchange="onApiChange()" /></label>
+			<label>
+				<button class="grow" onclick="onForkChatClick()">建立聊天副本</button>
+			</label>
+			<label>
+				<button class="grow" onclick="onDeleteChatClick()">刪除聊天</button>
+			</label>
+			<label>
+				匯出
+				<button onclick="onExportFileClick()">至本機檔案</button>
+			</label>
+			<label>
+				匯入
+				<input type="file" id="import_chat_file" style="display:none;" onchange="onImportFileChange(event)" />
+				<button onclick="onImportFileClick()">自本機檔案</button>
+			</label>
+		</article>
+		
+	</main>
+	<div id="loading" class="overlay"><div class="spinner"></div></div>
+</body>
+
+<template id="html_post_item">
+	<li post-key="" role="" mode="text" onclick="onPostClick(this, event);">
+		<div class="text">
+			<div class="content"></div>
+			<div class="control">
+				<button op="left" class="moveLeft">＜</button>
+				<span>- / -</span>
+				<button op="right" class="moveRight">＞</button>
+				<button op="add"    alt="新增" title="新增一則回應">➕</button>
+				<button op="delete" alt="刪除" title="刪除此則回應">🗑</button>
+				<button op="regen"  alt="重整" title="重新產生回應">🔄</button>
+				<button op="edit"   alt="編輯" title="編輯回應內容" class="right">✏️</button>
+			</div>
+		</div>
+		<div class="edit">
+			<textarea></textarea>
+			<div class="control">
+				<button op="cancel" alt="放棄" title="放棄變更">❌</button>
+				<button op="save"   alt="確定" title="確定">✔️</button>
+			</div>
+		</div>
+	</li>
+</template>
+
+<template id="html_chat_item">
+	<li>
+		<a href=""><h4 class="title"></h4><p class="content"></p></a>
+	</li>
+</template>
+
+</html>
