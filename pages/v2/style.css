@@ -294,13 +294,15 @@ article .bottom_control >button {
 	padding:0.25rem;
 }
 
-#管理 label, #首頁 label {
+#管理 label,
+#首頁 label {
 	display:flex;
 	align-items:center;
 	gap:0.5rem;
 }
 
-#管理 label >button, #首頁 label >button {
+#管理 button,
+#首頁 button {
 	min-height:2.5rem;
 	
 	padding:0 0.5rem;
