@@ -290,6 +290,10 @@ article .bottom_control >button {
 	width:8em;
 }
 
+#參數 [field-key="api_parameter"] {
+	padding:0.25rem;
+}
+
 #管理 label, #首頁 label {
 	display:flex;
 	align-items:center;
