@@ -99,13 +99,13 @@ function buildMessages(options) {
 	
 	template = template.replace(/<MESSAGE_HISTORY \/>/gis, '<MESSAGE role="list">$1</MESSAGE>');
 	let msgs = [];
-	let regex = /<MESSAGE role="([^"]*)">([^<]*)<\/MESSAGE>/gis;
+	let regex = /<MESSAGE role="([^"]*)">(.*?)<\/MESSAGE>/gis;
 	let match;
 	let countToken = 0;
 	while ((match = regex.exec(template)) !== null) {
 		let item = {
 			role: match[1],
-			content: match[2],
+			content: match[2].replaceAll('<', '&lt;').replace('>', '&gt;'),
 		};
 		msgs.push(item);
 		
@@ -132,7 +132,7 @@ function buildMessages(options) {
 				
 				postMsgs.push({
 					role: post.role,
-					content: content,
+					content: content.replaceAll('<', '&lt;').replace('>', '&gt;'),
 				});
 			}
 			for(let i=postMsgs.length-1; i>=0; --i) {
