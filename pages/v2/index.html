@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANT AI (Alpha)</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_dark.css">
     <script src="env.js"></script>
     <script src="env_overwrite.js"></script>
     <script src="js/management.js"></script>
@@ -26,6 +27,7 @@
 				<li id="nav_active_article"></li>
 			</ul>
 		</nav>
+		<button id="dark_toggle" onclick="onDarkToggleClick();">🔆</button>
 		<button id="menu_icon" onclick="onMenuIconClick(event);">…</button>
 		<menu isShow="false">
 			<li onclick="onMenuItemClick('對話');">對話</li>
@@ -109,19 +111,19 @@
 			<label>
 				<button class="grow" onclick="onDeleteChatClick()">刪除聊天</button>
 			</label>
-			<label>
+			<div>
 				匯出
 				<button onclick="onExportFileClick()">至本機檔案</button>
-			</label>
-			<label>
+			</div>
+			<div>
 				匯入
 				<input type="file" id="import_chat_file" style="display:none;" onchange="onImportFileChange(event)" />
 				<button onclick="onImportFileClick()">自本機檔案</button>
-			</label>
+			</div>
 		</article>
 		
 	</main>
-	<div id="loading" class="overlay"><div class="spinner"></div></div>
+	<div id="loading" class="overlay show"><div class="spinner"></div></div>
 </body>
 
 <template id="html_post_item">
