@@ -27,7 +27,7 @@ function onLoad_Menu() {
 	
 	setting = data;
 
-	document.querySelector('body').classList.toggle('dark', setting.isDark);
+	document.querySelector('body').classList.toggle('dark', !!setting.isDark);
 	document.querySelector('#loading').classList.remove('show');
 	
 	document.body.addEventListener('click', ()=>{
