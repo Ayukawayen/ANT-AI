@@ -390,6 +390,10 @@ article .bottom_control >button {
 	overflow-y:scroll;
 }
 
+#對話 .posts {
+	display:inline-block;
+}
+
 #對話 .posts >li[role="user"] {
 }
 #對話 .posts >li[role="assistant"] {
