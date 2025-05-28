@@ -392,6 +392,7 @@ article .bottom_control >button {
 
 #對話 .posts {
 	display:inline-block;
+	width:100%;
 }
 
 #對話 .posts >li[role="user"] {
