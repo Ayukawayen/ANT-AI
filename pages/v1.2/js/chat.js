@@ -21,13 +21,7 @@ function onDeleteChatClick() {
 }
 
 function onForkChatClick() {
-	let id = getNewChatId();
-	
-	while(localStorage.getItem(id + '.field') || localStorage.getItem(id + '.post')) {
-		id = getNewChatId();
-	}
-	
-	chatId = id;
+	chatId = getNewChatId();
 	
 	onFieldChange();
 	onPostChange();
@@ -76,5 +70,11 @@ function refreshChatNodes() {
 }
 
 function getNewChatId() {
-	return crypto.randomUUID().replaceAll('-','').toUpperCase();
+	while(true) {
+		let id = crypto.randomUUID().replaceAll('-','').toUpperCase();
+		
+		if(localStorage.getItem(id + '.field') || localStorage.getItem(id + '.post')) continue;
+		
+		return id;
+	}
 }
