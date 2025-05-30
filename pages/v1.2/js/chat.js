@@ -26,7 +26,7 @@ function onForkChatClick() {
 	onFieldChange();
 	onPostChange();
 	
-	location.href = '?' + id;
+	location.href = '?' + chatId;
 }
 
 function onChatChange() {
