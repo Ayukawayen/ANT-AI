@@ -155,8 +155,8 @@ function buildTemplate() {
 	
 	result = result.replace(/\n?<IF {{(.*?)}}>([\s\S]*?)<\/IF>\n?/gi, (match, k, content) => {
 		if(!fields[k] && k!='TRUE') return '';
-        return content || '';
-    });
+		return content || '';
+	});
 
 	['char.memory','user.description','char.description','char.scenario','char.example','user','char'].forEach((item)=>{
 		result = result.replaceAll(`{{${item}}}`, fields[item]);
