@@ -18,8 +18,20 @@ var trans = {
 	'tran_lang_frontend':'繁體中文',
 	'tran_lang_llm':'English',
 	'tran_context_size':16000,
-	'tran_parameter':'',
-	'tran_prompt':'',
+	'tran_parameter':`{
+ "model": "google/gemma-3-27b-it:free",
+ "temperature": 0.5,
+ "messages":[]
+}`,
+	'tran_prompt':`You are a professional literary translator. Your task is to translate a new chapter of an ongoing literary work. After reviewing the background information and the most recent translated sections provided, translate the latest original-language chapter into the same target language. Ensure consistency in terminology with the earlier translations, and make the new translation flow seamlessly as a continuation of the translated text.
+
+## About the creation: {
+{{char.scenario}}
+
+{{char.description}}
+
+{{user.description}}
+}`,
 };
 
 window.addEventListener('load', onLoad_Tran);
@@ -181,15 +193,18 @@ function buildTranslated(lang, options) {
 
 function onLoad_Tran() {
 	let data = localStorage.getItem(StoreKey_Tran);
-	if(!data) return;
+	
+	if(!data) {
+		localStorage.setItem(StoreKey_Tran, JSON.stringify(trans));
+		data = '{}';
+	}
 	
 	data = JSON.parse(data);
 	
 	for(let k in trans) {
 		let node = document.querySelector(`[field-key="${k}"]`)||{};
 		
-		trans[k] = data[k]||node.value||trans[k];
-		
+		trans[k] = data[k]||trans[k];
 		node.value = trans[k];
 	}
 }
