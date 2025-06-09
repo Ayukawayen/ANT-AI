@@ -186,17 +186,12 @@ function onLoad_Tran() {
 	data = JSON.parse(data);
 	
 	for(let k in trans) {
-		if(data[k]) {
-			trans[k] = data[k];
-		}
+		let node = document.querySelector(`[field-key="${k}"]`)||{};
 		
-		let node = document.querySelector(`[field-key="${k}"]`);
-		if(!node) continue;
+		trans[k] = data[k]||node.value||trans[k];
 		
 		node.value = trans[k];
 	}
-	
-	onTranSaveClick();
 }
 
 function onTranChange() {
@@ -217,6 +212,8 @@ function onTranResetClick() {
 		
 		node.value = trans[k];
 	}
+	
+	onMenuItemClick('對話');
 }
 
 function onTranSaveClick() {
@@ -228,4 +225,6 @@ function onTranSaveClick() {
 	}
 	
 	onTranChange();
+	
+	onMenuItemClick('對話');
 }
