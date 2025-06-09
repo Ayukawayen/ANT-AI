@@ -35,7 +35,8 @@ function onChatChange() {
 	};
 	
 	chats[chatId].timestamp = Date.now();
-	chats[chatId].content = posts[currentPostKey].contents['frontend']||posts[currentPostKey].contents['llm'];
+	let contents = posts[currentPostKey].contents||{};
+	chats[chatId].content = contents['frontend']||contents['llm'];
 	
 	localStorage.setItem(StoreKey_Chat, JSON.stringify(chats));
 }
