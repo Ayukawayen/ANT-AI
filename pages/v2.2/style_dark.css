@@ -1,0 +1,73 @@
+body.dark {
+	background-color:#000;
+	color:#ccc;
+}
+
+body.dark input,
+body.dark textarea {
+	background-color:#333;
+	color:#ccc;
+}
+
+body.dark button {
+	background-color:#333;
+	color:#ccc;
+}
+
+
+body.dark article.content_edit [contenteditable] {
+	background-color:#333;
+	color:#ccc;
+}
+
+body.dark article.content_edit [contenteditable] :is(i, em) {
+	color:#996;
+}
+
+body.dark article.content_edit [contenteditable] u {
+	background-color:#ccc;
+	color:#666;
+}
+
+body.dark article.content_edit [contenteditable] :is(i, em) u,
+body.dark article.content_edit [contenteditable] u :is(i, em) {
+	color:#774;
+}
+
+
+body.dark header {
+	background-color:#333;
+	color:#fff;
+}
+body.dark header >#menu_icon {
+	background-color:#fff;
+	color:#333;
+}
+
+body.dark header >menu {
+	background-color:#999;
+	color:#000;
+}
+body.dark  header >menu >li {
+}
+body.dark header >menu >li:hover {
+	background-color:#ccc;
+	color:#333;
+}
+
+
+body.dark #對話 .posts >li >.content >.text span.quotation {
+	color:#9f9;
+}
+body.dark #對話 .posts >li >.content >.text em {
+	color:#aaa;
+}
+
+body.dark #對話 .posts >li button {
+	border:solid 1px #666;
+}
+
+
+body.dark #對話 .posts .control .edit .tran_link {
+	color:#99f;
+}
