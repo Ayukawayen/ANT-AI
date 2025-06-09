@@ -487,3 +487,18 @@ article.field_form details textarea {
 #對話 .posts >li .control >div >button.right {
 	float:right;
 }
+
+
+#對話 .posts .content .frontend {
+}
+#對話 .posts .content .llm {
+}
+
+#對話 .posts .content >.text >.frontend {
+}
+#對話 .posts .content >.text >.llm {
+}
+#對話 .posts .content >.edit >.frontend {
+}
+#對話 .posts .content >.edit >.llm {
+}
