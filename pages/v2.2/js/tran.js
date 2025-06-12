@@ -17,7 +17,7 @@ const translateMessages = [`{{tran_prompt}}
 var trans = {
 	'tran_lang_frontend':'繁體中文',
 	'tran_lang_llm':'English',
-	'tran_context_size':16000,
+	'tran_context_size':4000,
 	'tran_parameter':`{
  "model": "google/gemma-3-27b-it:free",
  "temperature": 0.5,
@@ -141,7 +141,7 @@ function buildTranMessages(from, to, postKey, content) {
 		role:role,
 		content:msgs[i],
 	}));
-	
+console.log(result);
 	return result;
 }
 
