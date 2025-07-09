@@ -87,19 +87,19 @@
 				</details>
 				<details open>
 					<summary>角色說明 {{char.description}}</summary>
-					<textarea field-key="char.description" placeholder="AI所扮演的角色資料" ></textarea>
+					<textarea field-key="char.description" placeholder="AI所扮演的角色資料" onfocus="onFieldFocus(this);" onfocusout="onFieldFocusOut(this);"></textarea>
 				</details>
 				<details open>
 					<summary>對話情境 {{char.scenario}}</summary>
-					<textarea field-key="char.scenario" placeholder="對話的背景資料、世界觀" ></textarea>
+					<textarea field-key="char.scenario" placeholder="對話的背景資料、世界觀" onfocus="onFieldFocus(this);" onfocusout="onFieldFocusOut(this);"></textarea>
 				</details>
 				<details open>
 					<summary>對話範例 {{char.example}}</summary>
-					<textarea field-key="char.example" placeholder="AI生成回應的參考範例" ></textarea>
+					<textarea field-key="char.example" placeholder="AI生成回應的參考範例" onfocus="onFieldFocus(this);" onfocusout="onFieldFocusOut(this);"></textarea>
 				</details>
 				<details>
 					<summary>對話記憶 {{char.memory}}</summary>
-					<textarea field-key="char.memory" placeholder="過去對話的資訊" ></textarea>
+					<textarea field-key="char.memory" placeholder="過去對話的資訊" onfocus="onFieldFocus(this);" onfocusout="onFieldFocusOut(this);"></textarea>
 				</details>
 			</div>
 			<div class="bottom_control">

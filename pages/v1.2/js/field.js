@@ -13,6 +13,13 @@ var fields = {
 
 window.addEventListener('load', onLoad_Field);
 
+function onFieldFocus(node) {
+	node.style.height = (node.scrollHeight+4) + 'px';
+}
+function onFieldFocusOut(node) {
+	node.style.height = 'auto';
+}
+
 function onResetClick() {
 	refreshFieldNodes();
 }

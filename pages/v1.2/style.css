@@ -211,6 +211,7 @@ article.field_form details input {
 }
 article.field_form details textarea {
 	width:100%;
+	height:auto;
 	min-height:5.5rem;
 	
 	resize:vertical;
