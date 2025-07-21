@@ -1,0 +1,409 @@
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+
+html, body {
+	font-size:14px;
+}
+
+html {
+	font-family:sans-serif;
+	background-color:#fff;
+}
+
+body {
+	display:flex;
+	flex-direction:column;
+	
+	width:100vw;
+	height:100dvh;
+	
+	background-color:#ccc;
+	color:#333;
+}
+
+textarea, input, button {
+	font-family:inherit;
+}
+
+a {
+	text-decoration:inherit;
+	color:inherit;
+}
+
+ul {
+	list-style:none;
+}
+
+.grow {
+	flex:1;
+	overflow:auto;
+}
+
+
+body >main {
+	flex:1;
+	
+	overflow-y:auto;
+}
+body >main:not(.showAll) >article {
+	display:none;
+}
+body >main >article {
+	flex-direction:column;
+	gap:0.5rem;
+	
+	width:100%;
+	height:100%;
+	
+	padding:0.5rem;
+}
+
+header, main {
+	width:100%;
+}
+
+header {
+	display:flex;
+	
+	height:3rem;
+	
+	background-color:#333;
+	color:#fff;
+}
+
+header>nav {
+	flex:1;
+}
+
+header>nav>ul {
+	padding:0 0.5rem;
+}
+
+header>nav>ul>li {
+	display:inline-block;
+	
+	line-height:1.5;
+	padding:0.75rem 0;
+}
+
+header>nav>ul>li:not(:first-child):before {
+	content:' > ';
+}
+
+header>nav>ul #nav_chat_name >input {
+	width:6rem;
+}
+
+header>#dark_toggle {
+	width:2rem;
+	height:2rem;
+	margin:0.5rem;
+	
+	border-radius:0.5rem;
+	
+	border:solid 1px #ccc;
+	background-color:transparent;
+}
+
+header>#menu_icon {
+	width:3rem;
+	height:3rem;
+}
+
+header>menu[isShow="false"] {
+	display:none;
+}
+
+header>menu {
+	position:absolute;
+	right:0;
+	top:3rem;
+	width:6rem;
+	
+	z-index:100;
+	
+	list-style:none;
+	text-align:center;
+	cursor:default;
+	
+	border:solid 1px #000;
+	
+	background-color:#fff;
+	color:#333;
+}
+header>menu>li {
+	width:100%;
+	padding:0.5rem 0;
+}
+header>menu>li:hover {
+	background-color:#ccc;
+	color:#000;
+}
+
+
+.overlay {
+	display:none;
+	
+	position:fixed;
+	top:0; bottom:0; left: 0; right:0;
+	background:rgba(0, 0, 0, 0.5);
+	
+	z-index:1000;
+}
+.overlay.show {
+	display:initial;
+}
+
+#loading .spinner {
+	position:absolute;
+	margin:auto;
+	top:0; bottom:0; left: 0; right:0;
+	
+	width:6rem;
+	height:6rem;
+	
+	border:0.25rem solid #99cccc;
+	border-top-color:#333366;
+	border-radius:50%;
+
+	animation:spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+
+article .bottom_control {
+	display:flex;
+	gap:0.5rem;
+}
+
+article .bottom_control >button {
+	flex:1;
+	
+	min-height:2.5rem;
+}
+
+article input {
+	padding:0.5rem;
+}
+article textarea {
+	padding:0.25rem 0.5rem;
+}
+
+
+article.field_form {
+}
+
+article.field_form details {
+	margin:0 0 0.5rem 0;
+}
+
+article.field_form details summary {
+	cursor:pointer;
+}
+
+article.field_form details input {
+	width:100%;
+	
+	margin:0.25rem 0;
+}
+article.field_form details textarea {
+	width:100%;
+	height:auto;
+	min-height:5.5rem;
+	
+	resize:vertical;
+	
+	margin:0.25rem 0 0;
+}
+
+#管理 label,
+#首頁 label {
+	display:flex;
+	align-items:center;
+	gap:0.5rem;
+}
+
+#管理 button,
+#首頁 button {
+	min-height:2.5rem;
+	
+	padding:0 0.5rem;
+}
+
+#管理 label >input {
+	flex:1;
+	
+	padding:0.5rem 0.25rem;
+}
+
+#首頁 .chats {
+}
+
+#首頁 .chats >li {
+	margin:0.5rem 0;
+	padding:0.5rem;
+	
+	border:solid 1px;
+	border-radius:0.5rem;
+	
+	background-color:#006;
+	color:#ccc;
+}
+
+#首頁 .chats>li:hover {
+	background-color:#99c;
+	color:#fff;
+}
+
+#首頁 .chats >li >a {
+	display:block;
+	
+	height:3.75rem;
+	
+	overflow-y:hidden;
+	line-height:1.25;
+	text-align:justify;
+	
+	text-decoration:none;
+	color:inherit;
+}
+
+#首頁 .chats >li >a .title {
+	font-size:1em;
+	
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+
+#對話 >.bottom {
+	display:flex;
+	flex-direction:row;
+}
+#對話 >.bottom >textarea {
+	flex-grow:1;
+	
+	line-height:1.5;
+	padding:0.75em;
+	height:4.5em;
+	margin:0.5rem;
+}
+#對話 >.bottom >button {
+	width:2rem;
+	height:2rem;
+	margin:0.5rem 0.5rem 0 0;
+}
+
+#對話 >.grow {
+	overflow-y:scroll;
+}
+
+#對話 .posts {
+	display:inline-block;
+	width:100%;
+}
+
+#對話 .posts >li[role="user"] {
+}
+#對話 .posts >li[role="assistant"] {
+}
+
+#對話 .posts >li[mode="edit"] >.text,
+#對話 .posts >li:not([mode="edit"]) >.edit {
+	display:none;
+}
+
+#對話 .posts >li >.edit >textarea {
+	display:block;
+	
+	padding:0.25rem;
+	width:100%;
+	min-height:3rem;
+	
+	line-height:1.4;
+	
+    font-family:sans-serif;
+	font-size:1rem;
+}
+#對話 .posts >li >.edit >.control {
+	text-align:right;
+}
+
+#對話 .posts >li >.text, #對話 .posts >li >.edit {
+	margin:0.5rem;
+	padding:0.25rem 0.5rem;
+}
+
+#對話 .posts >li >.text {
+	text-align:justify;
+	line-height:1.5;
+	
+	background-color:#333;
+	color:#ccc;
+}
+
+#對話 .posts >li >.text >.content .reasoning {
+	white-space:pre-wrap;
+	
+	font-size:87.5%;
+	padding:0.5em;
+	
+	background-color:#666;
+}
+#對話 li[role="user"] >.text >.content .reasoning {
+	display:none;
+}
+
+
+#對話 .posts >li >.text >.content p {
+	padding:0.25rem 0;
+}
+
+#對話 .posts >li >.text >.content span.quotation {
+	color:#9f9;
+}
+#對話 .posts >li >.text >.content em {
+	font-style:italic;
+	color:#999;
+}
+
+
+#對話 .control >span {
+	display:inline-block;
+	
+	min-width:3rem;
+	text-align:center;
+}
+
+#對話 .control >button {
+	width:2rem;
+	height:2rem;
+	padding:0.25rem;
+	min-height:0;
+	
+	margin:0 0.25rem;
+	
+	border-style:none;
+	
+	text-align:center;
+}
+
+#對話 li[role="user"] .control >button[op="regen"] {
+	display:none;
+}
+
+#對話 li[is_first="true"] .control >button[op="regen"] {
+	display:none;
+}
+
+#對話 .control >button.right {
+	float:right;
+}

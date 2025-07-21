@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANT AI (Alpha)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_dark.css">
+    <script src="env.js"></script>
+    <script src="env_overwrite.js"></script>
+    <script src="js/management.js"></script>
+    <script src="js/field.js"></script>
+    <script src="js/prompt.js"></script>
+    <script src="js/post.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/menu.js"></script>
+    <script defer src="default_value.js"></script>
+    <script defer src="script.js"></script>
+	<style id="style_active_article">#首頁 {display:flex;}</style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="?">首頁</a></li>
+				<li id="nav_chat_name">聊天室 <input type="text" onchange="onChatNameChange(this.value)" /></li>
+				<li id="nav_active_article"></li>
+			</ul>
+		</nav>
+		<button id="dark_toggle" onclick="onDarkToggleClick();">🔆</button>
+		<button id="menu_icon" onclick="onMenuIconClick(event);">…</button>
+		<menu isShow="false">
+			<li onclick="onMenuItemClick('對話');">對話</li>
+			<li onclick="onMenuItemClick('提示詞');">提示詞</li>
+			<li onclick="onMenuItemClick('參數');">參數</li>
+			<hr />
+			<li onclick="onMenuItemClick('管理');">管理</li>
+		</menu>
+	</header>
+	<main>
+		<article id="首頁">
+			<label>
+				<button class="grow" onclick="onNewChatClick()">新聊天</button>
+			</label>
+			<section class="grow">
+				<ul class="chats">
+				</ul>
+			</section>
+		</article>
+		
+		<article id="對話">
+			<section class="grow">
+				<ul class="posts">
+				</ul>
+			</section>
+			<section class="bottom">
+				<textarea id="conversation_usertext" onkeydown="onUsertextKeydown(event)"></textarea>
+				<button onclick="onUsertextSubmitClick()">↑</button>
+			</section>
+		</article>
+
+		<article id="提示詞" class="field_form">
+			<label>
+				指令長度
+				<input type="text" field-key="context_size" placeholder="送出給API的指令長度上限(估計值)，影響對話歷史的記憶長度。" />
+			</label>
+			<textarea class="grow" field-key="prompt" ></textarea>
+			
+			<div class="bottom_control">
+				<button onclick="onResetClick()">全部重置</button>
+				<button onclick="onSaveClick()">全部儲存</button>
+			</div>
+		</article>
+		
+		<article id="參數" class="field_form">
+			<textarea class="grow" field-key="parameter" ></textarea>
+			<div class="bottom_control">
+				<button onclick="onResetClick()">全部重置</button>
+				<button onclick="onSaveClick()">全部儲存</button>
+			</div>
+		</article>
+		
+		<article id="管理">
+			<label>API URL<input type="url" field-key="api_url" onchange="onApiChange()" /></label>
+			<label>API KEY<input type="password" field-key="api_key" onchange="onApiChange()" /></label>
+			<label>
+				<button class="grow" onclick="onForkChatClick()">建立聊天副本</button>
+			</label>
+			<label>
+				<button class="grow" onclick="onDeleteChatClick()">刪除聊天</button>
+			</label>
+			<div>
+				匯出
+				<button onclick="onExportFileClick()">至本機檔案</button>
+			</div>
+			<div>
+				匯入
+				<input type="file" id="import_chat_file" style="display:none;" onchange="onImportFileChange(event)" />
+				<button onclick="onImportFileClick()">自本機檔案</button>
+			</div>
+		</article>
+		
+	</main>
+	<div id="loading" class="overlay show"><div class="spinner"></div></div>
+</body>
+
+<template id="html_post_item">
+	<li post-key="" role="" mode="text" onclick="onPostClick(this, event);">
+		<div class="text">
+			<div class="content"></div>
+			<div class="control">
+				<button op="left" class="moveLeft">＜</button>
+				<span>- / -</span>
+				<button op="right" class="moveRight">＞</button>
+				<button op="add"    alt="新增" title="新增一則回應">➕</button>
+				<button op="delete" alt="刪除" title="刪除此則回應">🗑</button>
+				<button op="regen"  alt="重整" title="重新產生回應">🔄</button>
+				<button op="edit"   alt="編輯" title="編輯回應內容" class="right">✏️</button>
+			</div>
+		</div>
+		<div class="edit">
+			<textarea></textarea>
+			<div class="control">
+				<button op="cancel" alt="放棄" title="放棄變更">❌</button>
+				<button op="save"   alt="確定" title="確定">✔️</button>
+			</div>
+		</div>
+	</li>
+</template>
+
+<template id="html_post_reasoning">
+	<details class="reasoning"><summary>思考過程</summary></details>
+</template>
+
+<template id="html_chat_item">
+	<li>
+		<a href=""><h4 class="title"></h4><p class="content"></p></a>
+	</li>
+</template>
+
+</html>
