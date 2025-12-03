@@ -35,6 +35,8 @@ function onSaveClick() {
 }
 
 function onLoad_Field() {
+	if(!isChatExist) return;
+	
 	refreshFieldNodes();
 }
 

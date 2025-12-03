@@ -134,6 +134,9 @@ async function loadCurrentChat() {
 	
 console.log(result);
 	if(!result.exists()) return;
+	
+	isChatExist = true;
+	
 console.log(result.data());
 	let data = result.data();
 	

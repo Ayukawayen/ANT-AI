@@ -1,4 +1,6 @@
-let chatId = (location.search||'?').substring(1);
+var chatId = (location.search||'?').substring(1);
+var isChatExist = false;
+
 document.querySelector('#nav_chat_name >input').setAttribute('placeholder', chatId.substr(0,8));
 
 function onLoad() {

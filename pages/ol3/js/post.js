@@ -123,6 +123,8 @@ function onPostChange() {
 }
 
 function onLoad_Post() {
+	if(!isChatExist) return;
+	
 	refreshPostNodes();
 }
 
