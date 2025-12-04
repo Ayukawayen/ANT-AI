@@ -12,6 +12,14 @@ var firebase = {
 
 window.addEventListener('load', onLoad_Firebase);
 
+function onLogoutClick() {
+	firebase['fb_user_email'] = '';
+	firebase['fb_user_pw'] = '';
+	localStorage.setItem(StoreKey_Fb, JSON.stringify(firebase));
+	
+	location.reload();
+}
+
 function onFirebaseChange() {
 	fbApp = fbAuth = fbDb = null;
 	
@@ -44,8 +52,13 @@ async function onLoad_Firebase() {
 		node.value = firebase[k];
 	}
 	
-	await loadChatSummarys();
-	await loadCurrentChat();
+	try {
+		await loadChatSummarys();
+		await loadCurrentChat();
+	} catch(e) {
+		document.querySelector('#loading').classList.remove('show');
+		return;
+	}
 	
 	onLoad_Api();
 	onLoad_Chat();
@@ -63,6 +76,11 @@ var fbUserCred;
 
 async function refreshLoginToken() {
 	if(fbUserCred && fbUserCred.expiresAt>Date.now()) return;
+	
+	if(!firebase['fb_api_key'] || !firebase['fb_proj_id'] || !firebase['fb_user_email'] || !firebase['fb_user_pw']) {
+		document.querySelector('#login').classList.add('show');
+		return -1;
+	}
 
 	fbApp ||= initializeApp({
 		apiKey: firebase['fb_api_key'],
@@ -96,7 +114,7 @@ async function storeCurrentChat() {
 	};
 	
 	try {
-		await refreshLoginToken();
+		if(await refreshLoginToken() == -1) return;
 		
 		await setDoc(doc(fbDb, 'chats', data.id), data);
 		await setDoc(doc(fbDb, 'chatSummarys', summary.id), summary);
@@ -108,7 +126,7 @@ async function storeCurrentChat() {
 
 async function removeCurrentChat() {
 	try {
-		await refreshLoginToken();
+		if(await refreshLoginToken() == -1) return;
 		
 		await deleteDoc(doc(fbDb, 'chats', chatId));
 		await deleteDoc(doc(fbDb, 'chatSummarys', chatId));
@@ -124,12 +142,12 @@ async function loadCurrentChat() {
 	let result;
 	
 	try {
-		await refreshLoginToken();
+		if(await refreshLoginToken() == -1) return;
 		
 		result = await getDoc(doc(fbDb, 'chats', chatId));
 	} catch (e) {
 		handleError(e);
-		return;
+		throw(e);
 	}
 	
 console.log(result);
@@ -151,7 +169,7 @@ async function loadChatSummarys() {
 	let response;
 	
 	try {
-		await refreshLoginToken();
+		if(await refreshLoginToken() == -1) return;
 		
 		response = await getDocs(query(
 			collection(fbDb, 'chatSummarys')
@@ -159,7 +177,7 @@ async function loadChatSummarys() {
 		));
 	} catch (e) {
 		handleError(e);
-		return;
+		throw(e);
 	}
 	
 console.log(response);
@@ -178,6 +196,7 @@ console.error(e);
 	return;
 }
 
+window.onLogoutClick = onLogoutClick;
 window.onFirebaseChange = onFirebaseChange;
 
 window.storeCurrentChat = storeCurrentChat;
