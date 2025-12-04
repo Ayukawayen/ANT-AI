@@ -162,6 +162,11 @@ header>menu>li:hover {
 	background-color:#ccc;
 }
 
+#Firebase a {
+	text-decoration:revert;
+	color:revert;
+}
+
 #Firebase label >input {
 	width:calc(100% - 8em);
 	
