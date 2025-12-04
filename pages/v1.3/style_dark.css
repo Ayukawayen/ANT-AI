@@ -72,3 +72,7 @@ body.dark #對話 .posts >li >.text >.content em {
 body.dark #對話 .posts >li button {
 	border:solid 1px #666;
 }
+
+body.dark #對話 .posts >li >.text >.content .reasoning {
+	background-color:#555;
+}
