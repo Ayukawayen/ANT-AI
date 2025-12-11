@@ -192,7 +192,7 @@ function updatePostContentNode(node, content, reasoning, model) {
 	reasoning ||= '';
 	model ||= '';
 	
-	node.querySelector('.edit textarea').value = `${content}`;
+	node.querySelector('.edit >textarea').value = `${content}`;
 	
 	let textNode = node.querySelector('.content');
 	
