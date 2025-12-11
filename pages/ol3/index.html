@@ -165,13 +165,13 @@
 					<li>在<q>Authentication</q>的<q>使用者</q>中新增一組<strong>獨立的</strong>電子郵件/密碼 (郵件位址符合格式即可。密碼勿使用其他服務的密碼)。</li>
 				</ul>
 			</details>
-			<div>
+			<form>
 				<label>專案 ID<input type="text" placeholder="專案 ID" field-key="fb_proj_id" onchange="onFirebaseChange()" /></label>
 				<label>Web API 金鑰<input type="password" placeholder="Web API 金鑰" field-key="fb_api_key" onchange="onFirebaseChange()" /></label>
 				<label>電子郵件<input type="text" placeholder="電子郵件" field-key="fb_user_email" onchange="onFirebaseChange()" /></label>
 				<label>密碼<input type="password" placeholder="密碼" field-key="fb_user_pw" onchange="onFirebaseChange()" /></label>
 				<button onclick="location.reload();">連線</button>
-			</div>
+			</form>
 		</article>
 	</div>
 	<div id="loading" class="overlay show"><div class="spinner"></div></div>
