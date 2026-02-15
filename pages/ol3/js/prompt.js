@@ -53,7 +53,7 @@ console.log(resp);
 				role:msg.role,
 				content:msg.content,
 				model:resp.model||'',
-				reasoning:msg.reasoning,
+				reasoning:msg.reasoning||msg.reasoning_content,
 			});
 			
 			if(options.replace) {
