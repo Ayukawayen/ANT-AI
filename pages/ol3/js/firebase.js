@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, getDocs, setDoc, deleteDoc, collection, query, orderBy } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-lite.js';
+import { getFirestore, doc, getDoc, getDocs, setDoc, deleteDoc, collection, query, where, orderBy, documentId } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-lite.js';
 
 const StoreKey_Fb = '_fb_.fb';
 var firebase = {
@@ -173,7 +173,7 @@ async function loadChatSummarys() {
 		
 		response = await getDocs(query(
 			collection(fbDb, 'chatSummarys')
-			//, orderBy('timestamp', 'desc')
+			, ...(chatId ? [where(documentId(), '==', chatId)] : [])
 		));
 	} catch (e) {
 		handleError(e);
