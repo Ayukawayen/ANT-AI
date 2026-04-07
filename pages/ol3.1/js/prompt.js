@@ -24,7 +24,7 @@ console.log('sendRequest');
 		if(notAutoSend) {
 			resp = {
 				choices:[
-					{ message:'' },
+					{ message:{ content:'', role:'assistant' } },
 				]
 			};
 		}
