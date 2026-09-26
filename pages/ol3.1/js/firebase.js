@@ -122,7 +122,7 @@ async function _batchUpdate(chatUpdate, summaryUpdate) {
 // 取得 chatSummarys 的 content+timestamp 更新物件
 function _summaryContentUpdate() {
 	return {
-		content: (posts[currentPostKey] || {}).content || '',
+		content: ((posts[currentPostKey] || {}).content || '').substr(0,400),
 		timestamp: Date.now(),
 	};
 }
@@ -307,7 +307,8 @@ console.log(result);
 console.log(result.data());
 	let data = result.data();
 	
-	fields = data.fields;
+	//fields = data.fields;
+	fields = { ...fields, ...data.fields }
 	posts = data.posts;
 	currentPostKey = data.currentPostKey;
 	

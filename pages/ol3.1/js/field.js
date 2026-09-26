@@ -10,6 +10,7 @@ var fields = {
 	'context_size':'',
 	'prompt':'',
 	'parameter':'',
+	'replacement':'',
 };
 
 function onFieldFocus(node) {

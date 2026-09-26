@@ -248,13 +248,19 @@ function addPost(arg) {
 	let key = nextPostKey();
 	
 	let parent = arg.parent||0;
+	let content = arg.content||'';
+	let replaces = fields['replacement'].split('\n').map((item)=>(item.split('|',2)));
+	replaces.forEach((item)=>{
+		if(item.length < 2) return;
+		content = content.replaceAll(item[0], item[1]);
+	});
 	
 	posts[key] = {
 		parent:parent,
 		childs:[],
 		latests:[null, null],
 		role:arg.role||'system',
-		content:arg.content||'',
+		content:content,
 		model:arg.model||{},
 	};
 	

@@ -50,9 +50,9 @@ Continue this fictional role-playing chat.
 	if(!node) return;
 	
 	node.value = `{
- "model": "google/gemma-3-27b-it:free",
+ "model": "google/gemma-4-31b-it:free",
  "temperature": 0.9,
- "max_tokens": 1600,
+ "max_tokens": 2000,
  "presence_penalty": 0.5,
  "frequency_penalty": 0.02,
  "messages":[]
